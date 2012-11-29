@@ -89,8 +89,8 @@ function printCommentForm($obj, $showcomments=true) {
 
 		if ($comments_open) {
 			?>
-			<fb:comments href="<?php echo $pageid ?>" width="470" num_posts="2"></fb:comments>
-			<fb:like send="true" layout="button_count"  width="90" show_faces="false"></fb:like>
+			<div class="fb-comments" data-href="<?php echo $pageid ?>" data-width="470" data-num-posts="5"></div>
+			<div class="fb-like" data-href="<?php echo $pageid ?>" data-send="true" data-layout="button_count" data-width="90" data-show-faces="false"></div>
 			<?php
 		}
 	}
