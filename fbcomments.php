@@ -42,6 +42,18 @@ function getCurrentPageObject() {
 	}
 
 function printCommentForm($obj, $showcomments=true) {
+?>
+<!-- Zenphoto FBComments -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=<?php echo getOption('fbcomments_APIkey'); ?>";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<?php
+
 	global $_zp_gallery_page;
 	switch ($_zp_gallery_page) {
 		case 'album.php':
@@ -77,20 +89,13 @@ function printCommentForm($obj, $showcomments=true) {
 
 		if ($comments_open) {
 			?>
-			<div class="fb-like" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false"></div>
-			<div class="fb-comments" data-href="<?php echo $pageid ?>" data-num-posts="5" data-width="470"></div>
+			<fb:comments href="<?php echo $pageid ?>" width="470" num_posts="2"></fb:comments>
+			<fb:like send="true" layout="button_count"  width="90" show_faces="false"></fb:like>
 			<?php
 		}
 	}
-?>
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=375364665888214";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-<?php
+	?>
+	<!-- End Zenphoto FBComments -->
+	<?php
 }
 ?>
