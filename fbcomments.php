@@ -41,17 +41,29 @@ function getCurrentPageObject() {
 		}
 	}
 
-function printCommentForm($obj, $showcomments=true) {
+function printCommentForm() {
 ?>
 <!-- Zenphoto FBComments -->
 <div id="fb-root"></div>
-<script>(function(d, s, id) {
+<script type="text/javascript">
+//Facebook
+(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;
   js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=<?php echo getOption('fbcomments_APIkey'); ?>";
   fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+}(document, 'script', 'facebook-jssdk'));
+//Google
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+//Twitter
+!function(d,s,id){var 
+js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+</script>
 <?php
 
 	global $_zp_gallery_page;
@@ -81,15 +93,17 @@ function printCommentForm($obj, $showcomments=true) {
 			break;
 	}
 	
-	if (is_null($obj)) {
-		$obj=getCurrentPageObject();
-	}
+	$obj=getCurrentPageObject();
+
 	if (!is_null($obj)) {
 		$pageid=getTinyURL($obj);
 
 		if ($comments_open) {
 			?>
-			<div class="fb-comments" data-href="<?php echo $pageid ?>" data-width="470" data-num-posts="5"></div>
+			<div class="fb-like" data-send="false" data-layout="button_count" data-width="90" data-show-faces="true"></div>
+			<a href="https://twitter.com/share" class="twitter-share-button" data-dnt="true" data-url="<?php echo $pageid ?>" data-text="Check this out!" data-count="horizontal">Tweet</a>
+			<g:plusone size="medium" href="<?php echo $pageid ?>"></g:plusone>
+			<p><div class="fb-comments" data-href="<?php echo $pageid ?>" data-width="470" data-num-posts="5"></div></p>
 			<?php
 		}
 	}
